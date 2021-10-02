@@ -14,10 +14,7 @@ class FlutterBlue {
 
   /// Singleton boilerplate
   FlutterBlue._() {
-    _channel.setMethodCallHandler((MethodCall call) {
-      _methodStreamController.add(call);
-      return;
-    });
+    _channel.setMethodCallHandler((MethodCall call) async => _methodStreamController.add(call));
 
     _setLogLevelIfAvailable();
   }
@@ -79,7 +76,7 @@ class FlutterBlue {
     ScanMode scanMode = ScanMode.lowLatency,
     List<Guid> withServices = const [],
     List<Guid> withDevices = const [],
-    Duration timeout,
+    required Duration timeout,
     bool allowDuplicates = false,
   }) async* {
     var settings = protos.ScanSettings.create()
@@ -136,7 +133,7 @@ class FlutterBlue {
     ScanMode scanMode = ScanMode.lowLatency,
     List<Guid> withServices = const [],
     List<Guid> withDevices = const [],
-    Duration timeout,
+    required Duration timeout,
     bool allowDuplicates = false,
   }) async {
     await scan(
@@ -227,7 +224,7 @@ class DeviceIdentifier {
 }
 
 class ScanResult {
-  const ScanResult({this.device, this.advertisementData, this.rssi});
+  const ScanResult({required this.device, required this.advertisementData, required this.rssi});
 
   ScanResult.fromProto(protos.ScanResult p)
       : device = new BluetoothDevice.fromProto(p.device),
@@ -256,12 +253,12 @@ class ScanResult {
 }
 
 class AdvertisementData {
-  final String localName;
-  final int txPowerLevel;
-  final bool connectable;
-  final Map<int, List<int>> manufacturerData;
-  final Map<String, List<int>> serviceData;
-  final List<String> serviceUuids;
+  final String? localName;
+  final int? txPowerLevel;
+  final bool? connectable;
+  final Map<int, List<int>>? manufacturerData;
+  final Map<String, List<int>>? serviceData;
+  final List<String>? serviceUuids;
 
   AdvertisementData(
       {this.localName,
