@@ -61,7 +61,7 @@ protobuf {
     // Configure the protoc executable
     protoc {
         // Download from repositories
-        artifact = 'com.google.protobuf:protoc:3.9.1'
+        artifact = 'com.google.protobuf:protoc:3.17.3'
     }
     plugins {
         javalite {
@@ -79,7 +79,7 @@ protobuf {
 }
 
 dependencies {
-    implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+    implementation 'com.google.protobuf:protobuf-lite:3.17.3'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     api 'androidx.core:core:1.0.1'
 }
